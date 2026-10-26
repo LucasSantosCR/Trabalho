@@ -1,0 +1,105 @@
+/* ====== Exemplo Visual ====== */
+.box-demo {
+  background: #00d8ff;
+  color: #000;
+  padding: 30px;
+  border: 5px solid #fff;
+  margin: 20px auto;
+  width: 200px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+/* ===== Exemplo do Box Model ===== */
+.box-model-demo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.margin {
+  background: rgba(255, 165, 0, 0.3);
+  padding: 20px 40px 40px 40px;
+  text-align: center;
+  color: #fff;
+}
+
+.border {
+  background: rgba(255, 99, 71, 0.4);
+  border: 5px solid rgba(255, 99, 71, 0.8);
+  padding: 20px 40px 40px 40px;
+}
+
+.padding {
+  background: rgba(135, 206, 235, 0.4);
+  padding: 20px 40px 40px 40px;
+}
+
+.content {
+  background: #00d8ff;
+  color: #000;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+
+.explanation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.explanation div {
+  flex: 1 1 280px;
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* ====== Área de Testes ====== */
+.teste-css {
+  background: rgba(255,255,255,0.05);
+  margin-top: 40px;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.teste-css h2 {
+  color: #00d8ff;
+  margin-bottom: 10px;
+}
+
+.caixa {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* ====== Classes para alteração ====== */
+.teste-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.caixa1 {
+  background: lightcoral;
+}
+
+.caixa2 {
+  background: lightblue;
+}
+
+.caixa3 {
+  background: lightgreen;
+}

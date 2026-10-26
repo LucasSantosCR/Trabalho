@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Float - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="float.css">
+</head>
+<body>
+
+  <header>
+    <h1>Float - Aula de CSS</h1>
+    <a href="index.html">⬅ Voltar ao Hub</a>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>O que é o Float?</h2>
+      <p>
+        A propriedade <code>float</code> permite que um elemento “flutue” à esquerda ou à direita dentro de seu contêiner,  
+        fazendo com que o conteúdo seguinte se ajuste ao seu lado.
+      </p>
+      <p>Os valores principais são:</p>
+      <ul>
+        <li><strong>float: left</strong> — move o elemento para a esquerda;</li>
+        <li><strong>float: right</strong> — move o elemento para a direita;</li>
+        <li><strong>float: none</strong> — comportamento padrão (sem flutuar).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Exemplo Prático</h2>
+      <div class="float-demo clearfix">
+        <div class="float-box left">Esquerda</div>
+        <div class="float-box right">Direita</div>
+        <p>
+          Este texto se ajusta entre as caixas flutuantes.  
+          Note que os elementos com <code>float</code> saem do fluxo normal da página e o texto envolve suas laterais.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Usando o Clear</h2>
+      <p>
+        Após usar <code>float</code>, é comum que o elemento pai “colapse” em altura.  
+        Para corrigir isso, usamos a propriedade <code>clear</code> ou a técnica <strong>clearfix</strong>.
+      </p>
+      <p>
+        Exemplo de clearfix aplicado ao container:
+      </p>
+      <pre><code>
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>Float em Imagens</h2>
+      <div class="float-demo clearfix">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60"
+             alt="Praia"
+             class="image-float">
+        <p>
+          O <code>float</code> é muito usado para alinhar imagens com o texto,  
+          especialmente quando queremos que o conteúdo flua ao lado dela.  
+          Neste exemplo, a imagem está com <code>float: left;</code> e o texto se ajusta automaticamente.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Atividade Prática</h2>
+      <p>
+        Crie uma página simples contendo:
+      </p>
+      <ul>
+        <li>Duas caixas flutuantes (<code>float: left</code> e <code>float: right</code>);</li>
+        <li>Uma imagem alinhada à direita com <code>float: right</code>;</li>
+        <li>Um parágrafo de texto fluindo entre os elementos.</li>
+      </ul>
+      <p>
+        Depois, adicione um elemento com <code>clear: both</code> para garantir que o layout fique correto.
+      </p>
+    </section>
+
+    
+    <section class="teste-css">
+      <h2>🧩 Área de Testes</h2>
+      <p>Altere as classes abaixo no arquivo <strong>position.css</strong> para ver como o CSS afeta cada elemento.</p>
+
+      <div class="teste-container">
+        <div class="caixa caixa1">.caixa1</div>
+        <div class="caixa caixa2">.caixa2</div>
+        <div class="caixa caixa3">.caixa3</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por Prof. Dionatan Inhoato Markiu — © 2025</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Posicionamento - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="position.css">
+</head>
+<body>
+
+  <header>
+    <h1>Posicionamento - Aula de CSS</h1>
+    <a href="index.html">⬅ Voltar ao Hub</a>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>O que é o posicionamento em CSS?</h2>
+      <p>
+        A propriedade <code>position</code> define como um elemento é posicionado na página e como ele se relaciona com outros elementos ao seu redor.
+      </p>
+      <p>Os principais valores de <code>position</code> são:</p>
+      <ul>
+        <li><strong>static</strong> — padrão, segue o fluxo normal da página;</li>
+        <li><strong>relative</strong> — desloca o elemento em relação à sua posição original;</li>
+        <li><strong>absolute</strong> — posiciona o elemento em relação ao primeiro ancestral posicionado;</li>
+        <li><strong>fixed</strong> — fica fixo na tela mesmo com rolagem;</li>
+        <li><strong>sticky</strong> — alterna entre relative e fixed dependendo da rolagem.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Exemplos Visuais</h2>
+
+      <p><strong>Position: static</strong> — padrão, o elemento segue o fluxo natural.</p>
+      <div class="demo-container">
+        <div class="box static">Static</div>
+      </div>
+
+      <p><strong>Position: relative</strong> — move-se em relação à posição original.</p>
+      <div class="demo-container">
+        <div class="box relative">Relative</div>
+      </div>
+
+      <p><strong>Position: absolute</strong> — é posicionado em relação ao ancestral com position definido.</p>
+      <div class="demo-container">
+        <div class="box absolute">Absolute</div>
+      </div>
+
+      <p><strong>Position: fixed</strong> — permanece fixo na tela.</p>
+      <div class="demo-container">
+        <div class="box fixed">Fixed</div>
+      </div>
+
+      <p><strong>Position: sticky</strong> — gruda no topo ao rolar a página.</p>
+      <div class="demo-container" style="height: 300px; overflow-y: scroll;">
+        <div style="height: 600px;">
+            <p style="margin-bottom: 100px;">Role para ver o efeito.</p>
+          <div class="box sticky">Sticky</div>
+          <p style="margin-top: 100px;">Role para ver o efeito.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Posicionamento de Imagens</h2>
+      <p>
+        Podemos usar <code>position: absolute</code> para colocar texto sobre imagens, rótulos, botões ou ícones.
+      </p>
+
+      <div class="img-container">
+        <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=800&q=60" alt="Paisagem de exemplo">
+        <div class="label">Legenda Posicionada</div>
+      </div>
+
+      <p>
+        No exemplo acima, a <code>div.label</code> foi posicionada com:
+      </p>
+<pre><code>.label {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+</code></pre>
+    </section>
+
+    <section class="teste-css">
+      <h2>🧩 Área de Testes</h2>
+      <p>Altere as classes abaixo no arquivo <strong>position.css</strong> para ver como o CSS afeta cada elemento.</p>
+
+      <div class="teste-container">
+        <div class="caixa caixa1">.caixa1</div>
+        <div class="caixa caixa2">.caixa2</div>
+        <div class="caixa caixa3">.caixa3</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por Prof. Dionatan Inhoato Markiu — © 2025</p>
+  </footer>
+
+</body>
+</html>

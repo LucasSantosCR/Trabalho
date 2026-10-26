@@ -1,0 +1,107 @@
+/* ====== Demonstrações ====== */
+.demo {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    height: 200px;
+    margin: 20px 0;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background: #00d8ff;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+a{
+  color: antiquewhite;
+  font-size: large;
+  font-weight: bold;
+}
+
+/* --- 1. Centralização com margin auto --- */
+.center-margin {
+    width: 100px;
+    margin: 0;
+}
+
+/* --- 2. Centralização absoluta --- */
+.center-absolute {
+    position: absolute;
+
+
+
+}
+
+/* --- 3. Flexbox --- */
+.flex-center {
+    display: flex;
+
+
+    height: 200px;
+}
+
+/* --- 4. Grid --- */
+.grid-center {
+    display: grid;
+    
+    height: 200px;
+}
+
+/* ====== Área de Testes ====== */
+.teste-css {
+  background: rgba(255,255,255,0.05);
+  margin-top: 40px;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.teste-css h2 {
+  color: #00d8ff;
+  margin-bottom: 10px;
+}
+
+.caixa {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* ====== Classes para alteração ====== */
+.teste-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.caixa1 {
+  background: lightcoral;
+}
+
+.caixa2 {
+  background: lightblue;
+}
+
+.caixa3 {
+  background: lightgreen;
+}
+
+
+@media (max-width: 600px) {
+    .box { width: 80px; height: 80px; font-size: 0.9rem; }
+}

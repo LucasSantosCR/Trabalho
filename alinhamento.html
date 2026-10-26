@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alinhamento e Centralização - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="alinhamento.css">
+</head>
+<body>
+
+  <header>
+    <h1>Alinhamento e Centralização - Aula de CSS</h1>
+    <a href="index.html">⬅ Voltar ao Hub</a>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Alinhamento e Centralização</h2>
+      <p>
+        Existem diversas formas de alinhar elementos horizontal e verticalmente no CSS.  
+        As principais abordagens variam conforme o contexto e o tipo de elemento.
+      </p>
+      <p>
+        Vamos ver as formas mais comuns:
+      </p>
+      <ul>
+        <li><code>margin: auto;</code></li>
+        <li><code>text-align</code> (para textos e inline-blocks)</li>
+        <li><code>position + transform</code></li>
+        <li><code>display: flex;</code></li>
+        <li><code>display: grid;</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>1. Centralização Horizontal com <code>margin: auto;</code></h2>
+      <p>
+        Funciona para elementos <strong>block</strong> com largura definida.
+      </p>
+      <div class="demo">
+        <div class="box center-margin">Centro</div>
+      </div>
+      <pre><code>
+.box {
+  width: 100px;
+  margin: 0 auto;
+}
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>2. Centralização com <code>position</code> e <code>transform</code></h2>
+      <p>
+        Combina <code>position: absolute;</code> com <code>transform: translate</code>  
+        para centralizar o elemento em qualquer direção.
+      </p>
+      <div class="demo">
+        <div class="box center-absolute">Centro</div>
+      </div>
+      <pre><code>
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>3. Centralização com Flexbox</h2>
+      <p>
+        O Flexbox é uma das formas mais modernas e simples de centralizar elementos,  
+        tanto horizontal quanto verticalmente.
+      </p>
+      <div class="demo flex-center">
+        <div class="box">Centro</div>
+      </div>
+      <pre><code>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+      </code></pre>
+
+      <p> <a href="https://flexboxfroggy.com/">Clique aqui para treinar com o sapinho 🐸</a> </p>
+    </section>
+
+    <section>
+      <h2>4. Centralização com Grid</h2>
+      <p>
+        Com o CSS Grid, é possível centralizar facilmente com apenas uma linha.
+      </p>
+      <div class="demo grid-center">
+        <div class="box">Centro</div>
+      </div>
+      <pre><code>
+.container {
+  display: grid;
+  place-items: center;
+}
+      </code></pre>
+ 
+      <p> <a href="https://cssgridgarden.com/">Clique aqui para treinar na fazendinha 🥕</a> </p>
+    </section>
+
+    <section>
+      <h2>Atividade Prática</h2>
+      <p>Crie uma página que contenha:</p>
+      <ul>
+        <li>Um quadrado centralizado com <code>margin: auto;</code>;</li>
+        <li>Um elemento centralizado com <code>position</code> e <code>transform</code>;</li>
+        <li>Um contêiner com <code>display: flex;</code> e centralização dupla;</li>
+        <li>Outro com <code>display: grid;</code> e <code>place-items: center;</code>.</li>
+      </ul>
+      <p>
+        Compare o comportamento de cada método e descubra qual é o mais prático para cada situação.
+      </p>
+    </section>
+    
+    <section class="teste-css">
+      <h2>🧩 Área de Testes</h2>
+      <p>Altere as classes abaixo no arquivo <strong>position.css</strong> para ver como o CSS afeta cada elemento.</p>
+
+      <div class="teste-container">
+        <div class="caixa caixa1">.caixa1</div>
+        <div class="caixa caixa2">.caixa2</div>
+        <div class="caixa caixa3">.caixa3</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por Prof. Dionatan Inhoato Markiu — © 2025</p>
+  </footer>
+
+</body>
+</html>

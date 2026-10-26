@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flexbox - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="flexbox.css">
+</head>
+<body>
+
+  <header>
+    <h1>Flexbox - Aula de CSS</h1>
+    <a href="index.html">Voltar ao Hub</a>
+  </header>
+
+  <main>
+
+    <section id="o-que-e">
+      <h2>O que é o Flexbox?</h2>
+      <p>
+        O <strong>Flexbox</strong> (Flexible Box Layout) é um modelo de layout <strong>unidimensional</strong>:
+        ele organiza os elementos em <strong>uma linha OU uma coluna</strong> por vez, distribuindo o espaço
+        disponível entre eles e alinhando-os com muito pouco código.
+      </p>
+      <p>Todo layout flex tem dois papéis:</p>
+      <ul>
+        <li><strong>Flex container</strong> - o elemento pai, que recebe <code>display: flex;</code>;</li>
+        <li><strong>Flex items</strong> - os <strong>filhos diretos</strong> do container (netos não viram itens!).</li>
+      </ul>
+      <p>
+        E dois eixos que controlam todo o alinhamento:
+      </p>
+      <ul>
+        <li><strong>Eixo principal (main axis)</strong> - a direção em que os itens são colocados (por padrão, horizontal);</li>
+        <li><strong>Eixo transversal (cross axis)</strong> - o eixo perpendicular ao principal (por padrão, vertical).</li>
+      </ul>
+
+      <div class="figura-eixos">
+        <div class="eixo-x"><span>Eixo principal (main axis)</span><i></i><b>▶</b></div>
+        <div class="eixo-y"><span>Eixo transversal</span><i></i><b>▼</b></div>
+        <div class="demo alto-160">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>Neste módulo</h3>
+      <ul class="indice">
+        <li><a href="#display-flex">display: flex</a></li>
+        <li><a href="#direcao">flex-direction</a></li>
+        <li><a href="#justify">justify-content</a></li>
+        <li><a href="#align-items">align-items</a></li>
+        <li><a href="#gap">gap</a></li>
+        <li><a href="#wrap">flex-wrap</a></li>
+        <li><a href="#flex-itens">flex (grow, shrink, basis)</a></li>
+        <li><a href="#order">order</a></li>
+        <li><a href="#align-self">align-self</a></li>
+        <li><a href="#margin-auto">margin: auto</a></li>
+        <li><a href="#aplicacoes">Aplicações reais</a></li>
+        <li><a href="#playground">Playground</a></li>
+      </ul>
+    </section>
+
+    <section id="display-flex">
+      <h2>1. Ativando o Flexbox <span class="nivel basico">Básico</span></h2>
+      <p>
+        Tudo começa com uma única linha no elemento pai: <code>display: flex;</code>.
+        Compare o comportamento padrão (<code>block</code>) com o flex:
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>display: block</code> (padrão)</p>
+          <div class="demo bloco">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>display: flex</code></p>
+          <div class="demo">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+          </div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: flex;   /* os filhos diretos viram flex items */
+}</code></pre>
+
+      <p>
+        Existe também o <code>display: inline-flex;</code>, que cria um container flex que se comporta
+        como um elemento <em>inline</em> (ocupa só a largura do conteúdo, em vez da linha inteira).
+      </p>
+    </section>
+
+    <section id="direcao">
+      <h2>2. flex-direction <span class="nivel basico">Básico</span></h2>
+      <p>
+        Define a direção do <strong>eixo principal</strong>, ou seja, para onde os itens são empilhados.
+        O valor padrão é <code>row</code>.
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>row</code> (padrão)</p>
+          <div class="demo dir-row"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>row-reverse</code></p>
+          <div class="demo dir-row-reverse"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>column</code></p>
+          <div class="demo dir-col"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>column-reverse</code></p>
+          <div class="demo dir-col-reverse"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: flex;
+  flex-direction: column;   /* row | row-reverse | column | column-reverse */
+}</code></pre>
+
+      <p class="dica">
+        <strong>Atenção:</strong> ao trocar para <code>column</code>, os eixos <strong>se invertem</strong>.
+        O eixo principal passa a ser vertical e o transversal, horizontal. Por isso
+        <code>justify-content</code> passa a alinhar na vertical e <code>align-items</code> na horizontal.
+      </p>
+    </section>
+
+    <section id="justify">
+      <h2>3. justify-content <span class="nivel basico">Básico</span></h2>
+      <p>
+        Distribui os itens ao longo do <strong>eixo principal</strong> (na horizontal, quando a direção é <code>row</code>).
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>flex-start</code> (padrão)</p>
+          <div class="demo jc-start"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>center</code></p>
+          <div class="demo jc-center"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>flex-end</code></p>
+          <div class="demo jc-end"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>space-between</code></p>
+          <div class="demo jc-between"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>space-around</code></p>
+          <div class="demo jc-around"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>space-evenly</code></p>
+          <div class="demo jc-evenly"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: flex;
+  justify-content: space-between;
+}</code></pre>
+
+      <ul>
+        <li><code>space-between</code> - primeiro item na ponta inicial, último na final, espaço igual entre eles;</li>
+        <li><code>space-around</code> - espaço igual <em>ao redor</em> de cada item (as pontas têm metade do espaço);</li>
+        <li><code>space-evenly</code> - todos os espaços, inclusive as pontas, são iguais.</li>
+      </ul>
+    </section>
+
+    <section id="align-items">
+      <h2>4. align-items <span class="nivel basico">Básico</span></h2>
+      <p>
+        Alinha os itens ao longo do <strong>eixo transversal</strong> (na vertical, quando a direção é <code>row</code>).
+        Para ver o efeito, o container precisa ter uma altura maior que a dos itens
+        (aqui, <code>height: 120px</code>).
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>stretch</code> (padrão)</p>
+          <div class="demo alto-120 ai-stretch"><div class="item a1">1</div><div class="item a2">2</div><div class="item a3">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>flex-start</code></p>
+          <div class="demo alto-120 ai-start"><div class="item a1">1</div><div class="item a2">2</div><div class="item a3">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>center</code></p>
+          <div class="demo alto-120 ai-center"><div class="item a1">1</div><div class="item a2">2</div><div class="item a3">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>flex-end</code></p>
+          <div class="demo alto-120 ai-end"><div class="item a1">1</div><div class="item a2">2</div><div class="item a3">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>baseline</code> (alinha pela linha do texto)</p>
+          <div class="demo alto-120 ai-baseline"><div class="item a1">1</div><div class="item a2">2</div><div class="item a3">3</div></div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: flex;
+  height: 120px;
+  align-items: center;
+}</code></pre>
+
+      <p class="dica">
+        <strong>Centralizar tudo:</strong> <code>justify-content: center;</code> +
+        <code>align-items: center;</code> centraliza um item no meio do container, na horizontal e na vertical.
+        É a técnica que vimos na aula de Alinhamento.
+      </p>
+    </section>
+
+    <section id="gap">
+      <h2>5. gap <span class="nivel basico">Básico</span></h2>
+      <p>
+        Cria espaço <strong>entre</strong> os itens, sem precisar de <code>margin</code> em cada um
+        (e sem sobrar margem nas pontas).
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>gap: 0</code> (padrão)</p>
+          <div class="demo gap-0"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+        <div>
+          <p class="rotulo"><code>gap: 20px</code></p>
+          <div class="demo gap-20"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: flex;
+  gap: 20px;                  /* espaço entre linhas e colunas */
+  /* gap: 10px 30px;    -> 10px entre as linhas, 30px entre as colunas */
+  /* row-gap: 10px;     -> só entre as linhas */
+  /* column-gap: 30px;  -> só entre as colunas */
+}</code></pre>
+    </section>
+
+    <section id="wrap">
+      <h2>6. flex-wrap <span class="nivel basico">Básico</span></h2>
+      <p>
+        Por padrão (<code>nowrap</code>), o Flexbox tenta manter todos os itens na <strong>mesma linha</strong>,
+        encolhendo-os se for preciso. Com <code>wrap</code>, os itens que não cabem
+        <strong>quebram para a linha de baixo</strong>.
+      </p>
+      <p>
+        Nos exemplos, cada item tem <code>width: 150px</code>.
+      </p>
+
+      <p class="rotulo"><code>flex-wrap: nowrap</code> (padrão) - os itens são espremidos</p>
+      <div class="demo wrap-no">
+        <div class="item largo">1</div><div class="item largo">2</div><div class="item largo">3</div><div class="item largo">4</div>
+        <div class="item largo">5</div><div class="item largo">6</div><div class="item largo">7</div><div class="item largo">8</div>
+      </div>
+
+      <p class="rotulo"><code>flex-wrap: wrap</code> - os itens quebram de linha</p>
+      <div class="demo wrap-yes gap-10">
+        <div class="item largo">1</div><div class="item largo">2</div><div class="item largo">3</div><div class="item largo">4</div>
+        <div class="item largo">5</div><div class="item largo">6</div><div class="item largo">7</div><div class="item largo">8</div>
+      </div>
+
+      <pre><code>.container {
+  display: flex;
+  flex-wrap: wrap;            /* nowrap | wrap | wrap-reverse */
+  gap: 10px;
+}
+
+/* Atalho: flex-flow = flex-direction + flex-wrap */
+.container {
+  flex-flow: row wrap;
+}</code></pre>
+
+      <p>
+        Quando há <strong>várias linhas</strong>, <code>align-content</code> controla como as linhas se distribuem
+        no eixo transversal (funciona como o <code>justify-content</code>, mas para as linhas).
+        Ele só tem efeito com <code>flex-wrap: wrap</code> e container mais alto que o conteúdo.
+      </p>
+    </section>
+
+    <section id="flex-itens">
+      <h2>7. flex-grow, flex-shrink e flex-basis <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        Até aqui configuramos o <strong>container</strong>. Estas propriedades são aplicadas nos
+        <strong>itens</strong> e controlam como cada um cresce, encolhe e qual o seu tamanho inicial:
+      </p>
+      <ul>
+        <li><code>flex-basis</code> - tamanho inicial do item no eixo principal (antes de crescer ou encolher). O padrão é <code>auto</code> (usa o <code>width</code> ou o conteúdo);</li>
+        <li><code>flex-grow</code> - quanto o item <strong>cresce</strong> para ocupar o espaço livre. Padrão: <code>0</code> (não cresce);</li>
+        <li><code>flex-shrink</code> - quanto o item <strong>encolhe</strong> quando falta espaço. Padrão: <code>1</code> (encolhe).</li>
+      </ul>
+
+      <h3>flex-grow: dividindo o espaço livre</h3>
+      <div class="exemplos">
+        <div>
+          <p class="rotulo">Sem <code>flex-grow</code> (sobra espaço)</p>
+          <div class="demo"><div class="item">A</div><div class="item">B</div><div class="item">C</div></div>
+        </div>
+        <div>
+          <p class="rotulo">Todos com <code>flex-grow: 1</code></p>
+          <div class="demo"><div class="item g1">A</div><div class="item g1">B</div><div class="item g1">C</div></div>
+        </div>
+      </div>
+
+      <h3>O atalho <code>flex</code></h3>
+      <p>
+        Na prática, usamos o atalho <code>flex: grow shrink basis</code>. O mais comum é
+        <code>flex: 1</code> (equivale a <code>1 1 0%</code>): os itens dividem o espaço em
+        <strong>proporção</strong> exata.
+      </p>
+
+      <p class="rotulo"><code>flex: 1</code> | <code>flex: 2</code> | <code>flex: 1</code> = proporção 1 : 2 : 1</p>
+      <div class="demo">
+        <div class="item f1">flex: 1</div>
+        <div class="item f2">flex: 2</div>
+        <div class="item f1">flex: 1</div>
+      </div>
+
+      <p class="rotulo">Barra lateral fixa + conteúdo fluido</p>
+      <div class="demo">
+        <div class="item lateral">flex: 0 0 150px</div>
+        <div class="item f1">flex: 1 (ocupa o resto)</div>
+      </div>
+
+      <pre><code>.lateral  { flex: 0 0 150px; }   /* não cresce, não encolhe, 150px */
+.conteudo { flex: 1; }           /* ocupa todo o espaço restante */</code></pre>
+
+      <h3>flex-shrink: quem aceita ser espremido</h3>
+      <p>
+        Cada item abaixo tem <code>width: 400px</code>, mais do que o container comporta.
+        No primeiro exemplo todos encolhem. No segundo, o item 1 tem <code>flex-shrink: 0</code>
+        e mantém o tamanho (os outros encolhem para compensar).
+      </p>
+      <p class="rotulo">Padrão (<code>flex-shrink: 1</code>): todos encolhem igualmente</p>
+      <div class="demo">
+        <div class="item enorme">1</div><div class="item enorme">2</div><div class="item enorme">3</div>
+      </div>
+
+      <p class="rotulo">Item 1 com <code>flex-shrink: 0</code>: ele mantém os 400px</p>
+      <div class="demo">
+        <div class="item enorme sem-encolher">1</div><div class="item enorme">2</div><div class="item enorme">3</div>
+      </div>
+    </section>
+
+    <section id="order">
+      <h2>8. order <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        Muda a <strong>ordem visual</strong> dos itens sem mexer no HTML. O padrão é <code>0</code> para todos;
+        itens com número menor aparecem primeiro (aceita valores negativos).
+      </p>
+
+      <div class="demo">
+        <div class="item ord3">HTML 1<br><small>order: 3</small></div>
+        <div class="item ord1">HTML 2<br><small>order: 1</small></div>
+        <div class="item ord2">HTML 3<br><small>order: 2</small></div>
+      </div>
+
+      <pre><code>.item-1 { order: 3; }
+.item-2 { order: 1; }
+.item-3 { order: 2; }   /* resultado visual: 2, 3, 1 */</code></pre>
+
+      <p class="dica">
+        <strong>Acessibilidade:</strong> o <code>order</code> altera só a aparência. Leitores de tela e a
+        navegação por <kbd>Tab</kbd> continuam seguindo a ordem do HTML. Prefira reorganizar o próprio HTML
+        sempre que possível.
+      </p>
+    </section>
+
+    <section id="align-self">
+      <h2>9. align-self <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        É o <code>align-items</code> aplicado a <strong>um único item</strong>: ele sobrescreve o alinhamento
+        definido pelo container só para aquele elemento.
+      </p>
+
+      <div class="demo alto-140 ai-start">
+        <div class="item">padrão</div>
+        <div class="item self-center">center</div>
+        <div class="item self-end">flex-end</div>
+        <div class="item self-stretch">stretch</div>
+      </div>
+
+      <pre><code>.container { display: flex; align-items: flex-start; }
+.item-2    { align-self: center; }
+.item-3    { align-self: flex-end; }
+.item-4    { align-self: stretch; }</code></pre>
+    </section>
+
+    <section id="margin-auto">
+      <h2>10. margin: auto dentro do flex <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        Dentro de um container flex, uma <code>margin: auto</code> <strong>absorve todo o espaço livre</strong>
+        daquele lado. É a forma mais simples de empurrar um item para a ponta oposta:
+        o truque clássico das barras de navegação.
+      </p>
+
+      <div class="demo nav-simples">
+        <div class="item logo">Logo</div>
+        <div class="item">Início</div>
+        <div class="item">Sobre</div>
+        <div class="item">Contato</div>
+      </div>
+
+      <pre><code>.logo {
+  margin-right: auto;   /* empurra os links para a direita */
+}</code></pre>
+    </section>
+
+    <section id="aplicacoes">
+      <h2>11. Flexbox na prática <span class="nivel app">Aplicação</span></h2>
+
+      <h3>a) Barra de navegação</h3>
+      <p>Logo à esquerda, links e botão à direita, tudo alinhado verticalmente:</p>
+      <nav class="nav-demo">
+        <span class="nav-logo">iStore</span>
+        <a href="#aplicacoes">Catálogo</a>
+        <a href="#aplicacoes">Contato</a>
+        <a href="#aplicacoes">Sobre nós</a>
+        <button type="button">Alto contraste</button>
+      </nav>
+      <pre><code>nav {
+  display: flex;
+  align-items: center;     /* centraliza na vertical */
+  gap: 20px;
+}
+.nav-logo {
+  margin-right: auto;      /* empurra o resto para a direita */
+}</code></pre>
+
+      <h3>b) Catálogo de produtos (o exemplo do projeto iStore)</h3>
+      <p>
+        No projeto <strong>iStore</strong>, o catálogo usa <code>flex-wrap</code> com cartões de largura fixa,
+        centralizados:
+      </p>
+      <pre><code>.produtos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.produto {
+  width: 250px;
+}</code></pre>
+      <p>
+        Veja a diferença entre <strong>largura fixa</strong> (cartões mantêm o tamanho e a última linha fica centralizada)
+        e <strong>flexível</strong> com <code>flex: 1 1 220px</code> (os cartões crescem para ocupar a linha):
+      </p>
+
+      <p class="rotulo">Largura fixa: <code>width: 220px</code> + <code>justify-content: center</code></p>
+      <div class="demo produtos produtos-fixos">
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 15</h4><p>128GB - Branco</p><strong>R$ 3.000</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 15 Pro</h4><p>256GB - Titânio natural</p><strong>R$ 4.299</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 14</h4><p>128GB - Azul</p><strong>R$ 2.599</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone SE</h4><p>64GB - Preto</p><strong>R$ 1.799</strong></article>
+      </div>
+
+      <p class="rotulo">Flexível: <code>flex: 1 1 220px</code></p>
+      <div class="demo produtos produtos-flex">
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 15</h4><p>128GB - Branco</p><strong>R$ 3.000</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 15 Pro</h4><p>256GB - Titânio natural</p><strong>R$ 4.299</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 14</h4><p>128GB - Azul</p><strong>R$ 2.599</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone SE</h4><p>64GB - Preto</p><strong>R$ 1.799</strong></article>
+      </div>
+
+      <p class="dica">
+        Repare que, no modo flexível, o último cartão sozinho na linha se estica até o final.
+        Isso acontece porque o Flexbox só enxerga <strong>uma dimensão</strong> por vez (cada linha é independente).
+        Para manter as colunas alinhadas entre as linhas, o ideal é usar o <a href="grid.html">CSS Grid</a>.
+      </p>
+
+      <h3>c) Rodapé sempre no fim da página</h3>
+      <p>
+        O próprio <strong>Hub de Aulas</strong> usa Flexbox para isso! Veja o trecho do <code>index.css</code>:
+      </p>
+      <pre><code>body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;   /* empilha header, main e footer */
+  align-items: center;
+}
+footer {
+  margin-top: auto;         /* empurra o rodapé para baixo */
+}</code></pre>
+
+      <h3>d) Centralização total</h3>
+      <pre><code>.tela {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+    </section>
+
+    <section id="playground">
+      <h2>Playground interativo</h2>
+      <p>
+        Mude as propriedades abaixo e veja o layout reagir em tempo real. O CSS correspondente aparece
+        embaixo, pronto para copiar.
+      </p>
+
+      <div class="controles">
+        <label>flex-direction
+          <select id="pg-direction">
+            <option>row</option>
+            <option>row-reverse</option>
+            <option>column</option>
+            <option>column-reverse</option>
+          </select>
+        </label>
+        <label>justify-content
+          <select id="pg-justify">
+            <option>flex-start</option>
+            <option>center</option>
+            <option>flex-end</option>
+            <option>space-between</option>
+            <option>space-around</option>
+            <option>space-evenly</option>
+          </select>
+        </label>
+        <label>align-items
+          <select id="pg-align">
+            <option>stretch</option>
+            <option>flex-start</option>
+            <option>center</option>
+            <option>flex-end</option>
+            <option>baseline</option>
+          </select>
+        </label>
+        <label>flex-wrap
+          <select id="pg-wrap">
+            <option>nowrap</option>
+            <option>wrap</option>
+            <option>wrap-reverse</option>
+          </select>
+        </label>
+        <label>gap: <output id="pg-gap-valor">10px</output>
+          <input type="range" id="pg-gap" min="0" max="50" value="10">
+        </label>
+      </div>
+
+      <div class="botoes">
+        <button type="button" id="pg-mais">+ Adicionar item</button>
+        <button type="button" id="pg-menos">− Remover item</button>
+        <button type="button" id="pg-reset">Restaurar padrão</button>
+      </div>
+
+      <div class="demo playground" id="pg-area"></div>
+
+      <pre><code id="pg-codigo"></code></pre>
+    </section>
+
+    <section id="resumo">
+      <h2>Resumo das propriedades</h2>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th>Onde aplicar</th><th>Propriedade</th><th>O que faz</th></tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="8" class="grupo">Container (pai)</td><td><code>display: flex</code></td><td>Ativa o Flexbox</td></tr>
+            <tr><td><code>flex-direction</code></td><td>Direção do eixo principal</td></tr>
+            <tr><td><code>flex-wrap</code></td><td>Permite quebrar em várias linhas</td></tr>
+            <tr><td><code>flex-flow</code></td><td>Atalho: direction + wrap</td></tr>
+            <tr><td><code>justify-content</code></td><td>Alinha/distribui no eixo principal</td></tr>
+            <tr><td><code>align-items</code></td><td>Alinha no eixo transversal</td></tr>
+            <tr><td><code>align-content</code></td><td>Distribui as linhas (com wrap)</td></tr>
+            <tr><td><code>gap</code></td><td>Espaço entre os itens</td></tr>
+            <tr><td rowspan="6" class="grupo">Itens (filhos)</td><td><code>flex-grow</code></td><td>Quanto o item cresce</td></tr>
+            <tr><td><code>flex-shrink</code></td><td>Quanto o item encolhe</td></tr>
+            <tr><td><code>flex-basis</code></td><td>Tamanho inicial</td></tr>
+            <tr><td><code>flex</code></td><td>Atalho: grow + shrink + basis</td></tr>
+            <tr><td><code>order</code></td><td>Ordem visual</td></tr>
+            <tr><td><code>align-self</code></td><td>Alinhamento individual</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="atividade">
+      <h2>Atividade Prática</h2>
+      <p>Crie uma página <code>atividade-flexbox.html</code> que contenha:</p>
+      <ul>
+        <li>Uma <strong>barra de navegação</strong> com logo à esquerda e três links à direita (use <code>margin-right: auto</code> ou <code>justify-content: space-between</code>);</li>
+        <li>Uma <strong>galeria de 6 cartões</strong> com <code>flex-wrap: wrap</code>, <code>gap</code> e <code>flex: 1 1 200px</code>;</li>
+        <li>Uma área com <strong>barra lateral fixa</strong> (<code>flex: 0 0 200px</code>) e conteúdo fluido (<code>flex: 1</code>);</li>
+        <li>Um <strong>rodapé</strong> que fique sempre no fim da tela, mesmo com pouco conteúdo;</li>
+        <li><strong>Desafio:</strong> no celular (<code>@media (max-width: 600px)</code>), faça a barra lateral ficar acima do conteúdo usando <code>flex-direction: column</code>.</li>
+      </ul>
+      <p>
+        Para treinar jogando: <a href="https://flexboxfroggy.com/#pt-br">Flexbox Froggy</a>.
+        Referência completa: <a href="https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/CSS_layout/Flexbox">MDN - Flexbox</a>.
+      </p>
+    </section>
+
+    <section class="teste-css">
+      <h2>Área de Testes</h2>
+      <p>Altere as propriedades de <strong>.teste-container</strong> e das classes <strong>.caixa1</strong> a <strong>.caixa3</strong> no arquivo <strong>flexbox.css</strong> para ver como o Flexbox afeta cada elemento.</p>
+
+      <div class="teste-container">
+        <div class="caixa caixa1">.caixa1</div>
+        <div class="caixa caixa2">.caixa2</div>
+        <div class="caixa caixa3">.caixa3</div>
+      </div>
+    </section>
+
+    <nav class="navegacao">
+      <a href="alinhamento.html">« 4. Alinhamento</a>
+      <a href="grid.html">6. Grid »</a>
+    </nav>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por Prof. Dionatan Inhoato Markiu - © 2025</p>
+  </footer>
+
+  <script src="flexbox.js"></script>
+</body>
+</html>

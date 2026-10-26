@@ -1,0 +1,128 @@
+ul {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+/* ====== Demonstrações ====== */
+.demo-container {
+    position: relative;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    height: 200px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background: #00d8ff;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.static { 
+    position: static; 
+}
+
+.relative { 
+    position: ; 
+    background: #ffd700; 
+}
+
+.absolute {
+    position: ;
+    background: #ff7b00;
+}
+
+.fixed {
+    position: ;
+    background: #ff3b3b;
+    z-index: 10;
+}
+
+.sticky {
+    position: ;
+    background: #7fff00;
+}
+
+/* ====== Imagens ====== */
+.img-container {
+    position: relative;
+    height: 250px;
+    background: #111;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.img-container .label {
+    position: ;
+    
+    background: rgba(0,0,0,0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* ====== Área de Testes ====== */
+.teste-css {
+  background: rgba(255,255,255,0.05);
+  margin-top: 40px;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.teste-css h2 {
+  color: #00d8ff;
+  margin-bottom: 10px;
+}
+
+.caixa {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* ====== Classes para alteração ====== */
+.teste-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.caixa1 {
+  background: lightcoral;
+}
+
+.caixa2 {
+  background: lightblue;
+}
+
+.caixa3 {
+  background: lightgreen;
+}
+
+
+
+@media (max-width: 600px) {
+    .box { width: 80px; height: 80px; font-size: 0.9rem; }
+}

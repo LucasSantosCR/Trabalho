@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grid - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="grid.css">
+</head>
+<body>
+
+  <header>
+    <h1>Grid - Aula de CSS</h1>
+    <a href="index.html">Voltar ao Hub</a>
+  </header>
+
+  <main>
+
+    <section id="o-que-e">
+      <h2>O que é o CSS Grid?</h2>
+      <p>
+        O <strong>CSS Grid Layout</strong> é um modelo de layout <strong>bidimensional</strong>:
+        ele divide o espaço em <strong>linhas E colunas</strong> ao mesmo tempo, formando uma grade onde
+        os elementos são posicionados. Se o Flexbox organiza itens em uma só direção por vez,
+        o Grid controla as duas direções juntas.
+      </p>
+      <p>Como no Flexbox, existem dois papéis:</p>
+      <ul>
+        <li><strong>Grid container</strong> - o elemento pai, que recebe <code>display: grid;</code>;</li>
+        <li><strong>Grid items</strong> - os <strong>filhos diretos</strong> do container, que ocupam as células da grade.</li>
+      </ul>
+
+      <h3>Vocabulário do Grid</h3>
+      <ul>
+        <li><strong>Linha da grade (grid line)</strong> - as linhas divisórias, <strong>numeradas a partir de 1</strong>. Uma grade de 3 colunas tem 4 linhas verticais;</li>
+        <li><strong>Trilha (track)</strong> - o espaço entre duas linhas: uma <strong>coluna</strong> ou uma <strong>linha</strong> da grade;</li>
+        <li><strong>Célula (cell)</strong> - o cruzamento de uma linha com uma coluna;</li>
+        <li><strong>Área (area)</strong> - um conjunto retangular de células;</li>
+        <li><strong>Gap</strong> - o espaço entre as trilhas.</li>
+      </ul>
+
+      <p class="rotulo">Grade com 3 colunas e 2 linhas. Os números amarelos são as <strong>linhas da grade</strong>:</p>
+      <div class="figura-linhas">
+        <div class="rot-col">
+          <span data-l="1"></span><span data-l="2"></span><span data-l="3" data-r="4"></span>
+        </div>
+        <div class="rot-lin">
+          <span data-l="1"></span><span data-l="2" data-r="3"></span>
+        </div>
+        <div class="demo-grid fig">
+          <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+          <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+        </div>
+      </div>
+
+      <h3>Neste módulo</h3>
+      <ul class="indice">
+        <li><a href="#colunas">display: grid</a></li>
+        <li><a href="#tamanhos">fr, repeat()</a></li>
+        <li><a href="#linhas">Linhas</a></li>
+        <li><a href="#gap">gap</a></li>
+        <li><a href="#posicionando">grid-column / grid-row</a></li>
+        <li><a href="#areas">grid-template-areas</a></li>
+        <li><a href="#alinhamento">Alinhamento</a></li>
+        <li><a href="#responsivo">auto-fit + minmax()</a></li>
+        <li><a href="#aplicacao">Aplicação real</a></li>
+        <li><a href="#flex-ou-grid">Flexbox ou Grid?</a></li>
+        <li><a href="#playground">Playground</a></li>
+      </ul>
+    </section>
+
+    <section id="colunas">
+      <h2>1. Criando a grade: colunas <span class="nivel basico">Básico</span></h2>
+      <p>
+        Duas propriedades já criam uma grade: <code>display: grid;</code> ativa o Grid e
+        <code>grid-template-columns</code> define <strong>quantas colunas</strong> existem e <strong>qual a largura</strong> de cada uma.
+        As linhas são criadas automaticamente conforme os itens vão sendo colocados.
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo">Só <code>display: grid</code> (1 coluna)</p>
+          <div class="demo-grid">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>grid-template-columns: 1fr 1fr 1fr</code></p>
+          <div class="demo-grid col-3">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+          </div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;   /* 3 colunas iguais */
+}</code></pre>
+
+      <p>
+        Os 6 itens foram distribuídos sozinhos: 3 na primeira linha, 3 na segunda. Ninguém precisou dizer
+        "quebre a linha aqui", ao contrário do <code>flex-wrap</code>.
+      </p>
+    </section>
+
+    <section id="tamanhos">
+      <h2>2. Unidades das trilhas: px, %, fr e repeat() <span class="nivel basico">Básico</span></h2>
+      <p>
+        Cada valor de <code>grid-template-columns</code> é a largura de uma coluna. Podemos misturar unidades:
+      </p>
+      <ul>
+        <li><code>px</code>, <code>%</code>, <code>rem</code> - tamanhos fixos ou proporcionais ao container;</li>
+        <li><code>fr</code> (<em>fraction</em>) - uma <strong>fração do espaço livre</strong>. <code>1fr 2fr</code> divide o espaço em 3 partes: a segunda coluna fica com o dobro da primeira;</li>
+        <li><code>auto</code> - o tamanho necessário para o conteúdo (ou o que sobrar);</li>
+        <li><code>repeat(vezes, tamanho)</code> - evita repetição: <code>repeat(4, 1fr)</code> = <code>1fr 1fr 1fr 1fr</code>;</li>
+        <li><code>minmax(mín, máx)</code> - um tamanho mínimo e um máximo (veremos adiante).</li>
+      </ul>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>100px 1fr 60px</code></p>
+          <div class="demo-grid col-mix">
+            <div class="cel">100px</div><div class="cel">1fr</div><div class="cel">60px</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>1fr 2fr 1fr</code></p>
+          <div class="demo-grid col-121">
+            <div class="cel">1fr</div><div class="cel">2fr</div><div class="cel">1fr</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>repeat(4, 1fr)</code></p>
+          <div class="demo-grid col-4">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div><div class="cel">4</div>
+            <div class="cel">5</div><div class="cel">6</div><div class="cel">7</div><div class="cel">8</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>25% 75%</code></p>
+          <div class="demo-grid col-pct">
+            <div class="cel">25%</div><div class="cel">75%</div>
+          </div>
+        </div>
+      </div>
+
+      <pre><code>.sidebar-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;        /* fixa + flexível */
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 colunas iguais */
+}</code></pre>
+
+      <p class="dica">
+        <strong>fr vs %:</strong> o <code>fr</code> já desconta o <code>gap</code> e as colunas fixas,
+        então <code>1fr 1fr 1fr</code> nunca estoura o container. Já três colunas de <code>33%</code> somadas ao
+        <code>gap</code> passam de 100%.
+      </p>
+    </section>
+
+    <section id="linhas">
+      <h2>3. Linhas: grid-template-rows e grid-auto-rows <span class="nivel basico">Básico</span></h2>
+      <p>
+        As <strong>linhas</strong> funcionam exatamente como as colunas:
+      </p>
+      <ul>
+        <li><code>grid-template-rows</code> - define a altura das linhas <em>explícitas</em> (as que você declarou);</li>
+        <li><code>grid-auto-rows</code> - define a altura das linhas criadas <em>automaticamente</em> quando os itens passam do que foi declarado.</li>
+      </ul>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>grid-template-rows: 40px 90px</code></p>
+          <div class="demo-grid col-3 lin-fixas">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>grid-auto-rows: 50px</code> (todas as linhas)</p>
+          <div class="demo-grid col-3 lin-auto">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+            <div class="cel">7</div><div class="cel">8</div><div class="cel">9</div>
+          </div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 40px 90px;     /* 1ª linha: 40px | 2ª linha: 90px */
+  grid-auto-rows: 50px;              /* linhas extras: 50px */
+}
+
+/* Muito usado: altura mínima, mas cresce se o conteúdo precisar */
+.container { grid-auto-rows: minmax(50px, auto); }</code></pre>
+    </section>
+
+    <section id="gap">
+      <h2>4. gap: o espaço entre as trilhas <span class="nivel basico">Básico</span></h2>
+      <p>
+        O <code>gap</code> cria espaço entre linhas e colunas, <strong>sem</strong> criar margem nas bordas da grade.
+        Também existem as versões separadas <code>row-gap</code> e <code>column-gap</code>.
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>gap: 0</code> (padrão)</p>
+          <div class="demo-grid col-3 g-0">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>gap: 15px</code></p>
+          <div class="demo-grid col-3 g-15">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>gap: 5px 30px</code> (linha | coluna)</p>
+          <div class="demo-grid col-3 g-mix">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+          </div>
+        </div>
+      </div>
+
+      <pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;                  /* espaço entre linhas e colunas */
+  /* gap: 5px 30px;     -> 5px entre as linhas, 30px entre as colunas */
+  /* row-gap: 5px;      -> só entre as linhas */
+  /* column-gap: 30px;  -> só entre as colunas */
+}</code></pre>
+    </section>
+
+    <section id="posicionando">
+      <h2>5. Posicionando itens: grid-column e grid-row <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        Por padrão, cada item ocupa <strong>uma célula</strong>, na ordem do HTML. Para fazer um item ocupar
+        <strong>várias células</strong>, indicamos entre quais <strong>linhas da grade</strong> ele fica:
+      </p>
+      <ul>
+        <li><code>grid-column: 1 / 3</code> - começa na linha 1 e termina na linha 3 (ocupa <strong>2 colunas</strong>);</li>
+        <li><code>grid-row: 1 / 3</code> - idem para as linhas (ocupa <strong>2 linhas</strong>);</li>
+        <li><code>grid-column: span 2</code> - "ocupe 2 trilhas" a partir de onde estiver;</li>
+        <li><code>grid-column: 1 / -1</code> - da primeira até a <strong>última</strong> linha (largura total).</li>
+      </ul>
+
+      <div class="demo-grid pos">
+        <div class="cel pa">A<small>grid-column: 1 / 3</small></div>
+        <div class="cel pb">B<small>grid-column: 3 / 5<br>grid-row: 1 / 3</small></div>
+        <div class="cel pc">C<small>grid-row: span 2</small></div>
+        <div class="cel">D</div>
+        <div class="cel">E</div>
+        <div class="cel">F</div>
+        <div class="cel">G</div>
+      </div>
+
+      <pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 60px;
+  gap: 8px;
+}
+.a { grid-column: 1 / 3; }                    /* colunas 1 e 2 */
+.b { grid-column: 3 / 5; grid-row: 1 / 3; }   /* colunas 3 e 4, linhas 1 e 2 */
+.c { grid-row: span 2; }                      /* ocupa 2 linhas */
+/* D, E, F e G são posicionados automaticamente nos espaços livres */</code></pre>
+
+      <p>
+        Os itens sem posição definida (D, E, F, G) <strong>preenchem os espaços livres</strong> automaticamente.
+        Esse comportamento se chama <em>auto-placement</em>.
+      </p>
+    </section>
+
+    <section id="areas">
+      <h2>6. grid-template-areas: desenhando o layout <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        Em vez de números de linhas, podemos <strong>nomear áreas</strong> e "desenhar" o layout com texto.
+        Cada string é uma linha da grade e cada palavra é uma coluna; repetir o nome faz a área ocupar várias células.
+        Use um ponto (<code>.</code>) para uma célula vazia.
+      </p>
+
+      <div class="demo-grid layout">
+        <div class="cel area-topo">topo</div>
+        <div class="cel area-menu">menu</div>
+        <div class="cel area-principal">principal</div>
+        <div class="cel area-rodape">rodapé</div>
+      </div>
+
+      <pre><code>.layout {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  grid-template-rows: 50px 110px 45px;
+  grid-template-areas:
+    "topo   topo"
+    "menu   principal"
+    "rodape rodape";
+  gap: 8px;
+}
+
+.topo      { grid-area: topo; }
+.menu      { grid-area: menu; }
+.principal { grid-area: principal; }
+.rodape    { grid-area: rodape; }</code></pre>
+
+      <p>
+        A grande vantagem: para um layout <strong>responsivo</strong>, basta redesenhar as áreas dentro de um
+        <code>@media</code>, sem mexer no HTML:
+      </p>
+
+      <pre><code>@media (max-width: 600px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "topo"
+      "menu"
+      "principal"
+      "rodape";
+  }
+}</code></pre>
+    </section>
+
+    <section id="alinhamento">
+      <h2>7. Alinhamento no Grid <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        O Grid usa os mesmos nomes do Flexbox, mas com uma diferença importante: existem alinhamentos
+        <strong>dos itens dentro das suas células</strong> e alinhamentos <strong>da grade inteira dentro do container</strong>.
+      </p>
+
+      <h3>a) Itens dentro da célula: justify-items, align-items e place-items</h3>
+      <ul>
+        <li><code>justify-items</code> - alinha na <strong>horizontal</strong>, dentro da célula;</li>
+        <li><code>align-items</code> - alinha na <strong>vertical</strong>, dentro da célula;</li>
+        <li><code>place-items</code> - atalho: <code>place-items: align justify</code> (um valor só vale para os dois).</li>
+      </ul>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>stretch</code> (padrão)</p>
+          <div class="demo-grid dem-al pi-stretch">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>place-items: start</code></p>
+          <div class="demo-grid dem-al pi-start">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>place-items: center</code></p>
+          <div class="demo-grid dem-al pi-center">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>place-items: end</code></p>
+          <div class="demo-grid dem-al pi-end">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>b) Um item específico: justify-self, align-self e place-self</h3>
+      <p>
+        Sobrescrevem o alinhamento do container <strong>para um único item</strong>:
+      </p>
+      <div class="demo-grid dem-al">
+        <div class="cel">padrão</div>
+        <div class="cel ps-center">place-self: center</div>
+        <div class="cel ps-end">place-self: end</div>
+      </div>
+
+      <h3>c) A grade dentro do container: justify-content e align-content</h3>
+      <p>
+        Quando as trilhas somam <strong>menos</strong> que o tamanho do container (por exemplo, colunas de
+        <code>60px</code> num container largo), sobra espaço. Estas propriedades distribuem a grade inteira nesse espaço,
+        com os mesmos valores do Flexbox (<code>start</code>, <code>center</code>, <code>end</code>, <code>space-between</code>, <code>space-around</code>, <code>space-evenly</code>).
+      </p>
+
+      <div class="exemplos">
+        <div>
+          <p class="rotulo"><code>justify-content: center;</code><br><code>align-content: center;</code></p>
+          <div class="demo-grid dem-content jc-centro">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><code>justify-content: space-between;</code><br><code>align-content: space-between;</code></p>
+          <div class="demo-grid dem-content jc-entre">
+            <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+            <div class="cel">4</div><div class="cel">5</div><div class="cel">6</div>
+          </div>
+        </div>
+      </div>
+
+      <pre><code>/* Centralizar um item no meio da tela: duas linhas! */
+.tela {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+/* A grade inteira centralizada dentro do container */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  justify-content: center;
+  align-content: center;
+}</code></pre>
+
+      <p>
+        Lembra do <code>place-items: center</code> da aula de <a href="alinhamento.html">Alinhamento</a>?
+        É exatamente isso.
+      </p>
+    </section>
+
+    <section id="responsivo">
+      <h2>8. Grid responsivo: repeat(auto-fit, minmax()) <span class="nivel inter">Intermediário</span></h2>
+      <p>
+        Esta é a combinação mais poderosa do Grid: <strong>colunas que se ajustam sozinhas</strong> ao tamanho da tela,
+        <strong>sem nenhum <code>@media</code></strong>.
+      </p>
+
+      <pre><code>.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}</code></pre>
+
+      <p>Lendo de dentro para fora:</p>
+      <ul>
+        <li><code>minmax(120px, 1fr)</code> - cada coluna tem <strong>no mínimo</strong> 120px e <strong>no máximo</strong> uma fração do espaço livre;</li>
+        <li><code>auto-fit</code> - "crie quantas colunas couberem" e, se sobrar espaço, <strong>estique</strong> as colunas ocupadas;</li>
+        <li>com <code>auto-fill</code>, as colunas vazias também são mantidas (os itens <strong>não</strong> esticam).</li>
+      </ul>
+
+      <p class="rotulo">Com poucos itens a diferença aparece. Mesmo código, só trocando <code>auto-fit</code> por <code>auto-fill</code>:</p>
+
+      <p class="rotulo"><code>repeat(auto-fit, minmax(100px, 1fr))</code> - os itens esticam</p>
+      <div class="demo-grid auto-fit">
+        <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+      </div>
+
+      <p class="rotulo"><code>repeat(auto-fill, minmax(100px, 1fr))</code> - as colunas vazias são mantidas</p>
+      <div class="demo-grid auto-fill">
+        <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div>
+      </div>
+
+      <p class="rotulo">Redimensione a janela para ver a grade abaixo trocar o número de colunas sozinha:</p>
+      <div class="demo-grid galeria">
+        <div class="cel">1</div><div class="cel">2</div><div class="cel">3</div><div class="cel">4</div>
+        <div class="cel">5</div><div class="cel">6</div><div class="cel">7</div><div class="cel">8</div>
+      </div>
+
+      <p class="dica">
+        <strong>Você já viu isso no hub!</strong> A página inicial (<code>index.css</code>) usa exatamente essa técnica
+        para os cartões dos módulos:
+      </p>
+      <pre><code>main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}</code></pre>
+    </section>
+
+    <section id="aplicacao">
+      <h2>9. Grid na prática: o catálogo da iStore <span class="nivel app">Aplicação</span></h2>
+      <p>
+        Na página de <a href="flexbox.html">Flexbox</a>, vimos que o catálogo da iStore com <code>flex: 1 1 220px</code> deixava
+        o último cartão esticado, porque cada linha do Flexbox é independente. Veja o mesmo catálogo
+        com <strong>Grid</strong>:
+      </p>
+
+      <div class="demo-grid catalogo">
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 15</h4><p>128GB - Branco</p><strong>R$ 3.000</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 15 Pro</h4><p>256GB - Titânio natural</p><strong>R$ 4.299</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 14</h4><p>128GB - Azul</p><strong>R$ 2.599</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone SE</h4><p>64GB - Preto</p><strong>R$ 1.799</strong></article>
+      </div>
+
+      <pre><code>.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}</code></pre>
+
+      <p>
+        Todos os cartões têm <strong>a mesma largura</strong> e as <strong>colunas ficam alinhadas</strong> entre as linhas,
+        mesmo quando a última linha está incompleta. Repare também que os cartões de uma mesma linha
+        têm a mesma altura, pois o <code>align-items</code> padrão é <code>stretch</code>.
+      </p>
+
+      <h3>Destacando um item</h3>
+      <p>
+        Como o Grid conhece as duas dimensões, destacar um produto é só pedir mais espaço:
+      </p>
+      <div class="demo-grid catalogo catalogo-destaque">
+        <article class="produto destaque"><span class="foto">⭐</span><h4>iPhone 15 Pro</h4><p>256GB - Titânio natural</p><strong>R$ 4.299</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 15</h4><p>128GB - Branco</p><strong>R$ 3.000</strong></article>
+        <article class="produto"><span class="foto">📱</span><h4>iPhone 14</h4><p>128GB - Azul</p><strong>R$ 2.599</strong></article>
+      </div>
+      <pre><code>.produtos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.destaque {
+  grid-column: span 2;    /* ocupa 2 colunas */
+  grid-row: span 2;       /* e 2 linhas */
+}</code></pre>
+    </section>
+
+    <section id="flex-ou-grid">
+      <h2>10. Flexbox ou Grid? <span class="nivel app">Aplicação</span></h2>
+      <p>
+        Nenhum dos dois é "melhor": eles resolvem problemas diferentes e <strong>funcionam muito bem juntos</strong>.
+      </p>
+
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th></th><th>Flexbox</th><th>Grid</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="grupo">Dimensões</td><td>Uma (linha <strong>OU</strong> coluna)</td><td>Duas (linhas <strong>E</strong> colunas)</td></tr>
+            <tr><td class="grupo">Quem manda?</td><td>O <strong>conteúdo</strong> define o layout</td><td>O <strong>layout</strong> define onde o conteúdo vai</td></tr>
+            <tr><td class="grupo">Ideal para</td><td>Componentes: menus, botões, barras, alinhamentos</td><td>Estrutura da página, galerias, painéis</td></tr>
+            <tr><td class="grupo">Quebra de linha</td><td>Com <code>flex-wrap</code>; cada linha é independente</td><td>Automática; colunas sempre alinhadas</td></tr>
+            <tr><td class="grupo">Exemplo</td><td>Navbar com logo à esquerda e links à direita</td><td>Página com topo, menu, conteúdo e rodapé</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>Regra prática:</strong> está alinhando itens em uma <em>linha ou coluna</em>? Use Flexbox.
+        Precisa controlar <em>linhas e colunas ao mesmo tempo</em>? Use Grid.
+        Na prática, o Grid monta o esqueleto da página e o Flexbox organiza o interior de cada pedaço.
+      </p>
+
+      <pre><code>/* O Grid divide a página... */
+.pagina {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
+/* ...e o Flexbox organiza o conteúdo de cada parte */
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}</code></pre>
+    </section>
+
+    <section id="playground">
+      <h2>Playground interativo</h2>
+      <p>
+        Monte a sua grade! Mude as propriedades e veja o resultado, com o CSS gerado embaixo.
+        Experimente ativar o modo <strong>auto-fit</strong> e redimensionar a janela.
+      </p>
+
+      <div class="controles">
+        <label>Colunas: <output id="pg-cols-valor">3</output>
+          <input type="range" id="pg-cols" min="1" max="6" value="3">
+        </label>
+        <label>gap: <output id="pg-gap-valor">10px</output>
+          <input type="range" id="pg-gap" min="0" max="40" value="10">
+        </label>
+        <label>justify-items
+          <select id="pg-justify">
+            <option>stretch</option>
+            <option>start</option>
+            <option>center</option>
+            <option>end</option>
+          </select>
+        </label>
+        <label>align-items
+          <select id="pg-align">
+            <option>stretch</option>
+            <option>start</option>
+            <option>center</option>
+            <option>end</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="opcoes">
+        <label><input type="checkbox" id="pg-autofit"> Usar <code>repeat(auto-fit, minmax(110px, 1fr))</code></label>
+        <label><input type="checkbox" id="pg-span"> Item 1 ocupa 2 colunas (<code>span 2</code>)</label>
+      </div>
+
+      <div class="botoes">
+        <button type="button" id="pg-mais">+ Adicionar item</button>
+        <button type="button" id="pg-menos">− Remover item</button>
+        <button type="button" id="pg-reset">Restaurar padrão</button>
+      </div>
+
+      <div class="demo-grid playground" id="pg-area"></div>
+
+      <pre><code id="pg-codigo"></code></pre>
+    </section>
+
+    <section id="resumo">
+      <h2>Resumo das propriedades</h2>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th>Onde aplicar</th><th>Propriedade</th><th>O que faz</th></tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="9" class="grupo">Container (pai)</td><td><code>display: grid</code></td><td>Ativa o Grid</td></tr>
+            <tr><td><code>grid-template-columns</code></td><td>Define as colunas</td></tr>
+            <tr><td><code>grid-template-rows</code></td><td>Define as linhas</td></tr>
+            <tr><td><code>grid-template-areas</code></td><td>Desenha o layout com áreas nomeadas</td></tr>
+            <tr><td><code>grid-auto-rows</code></td><td>Altura das linhas criadas automaticamente</td></tr>
+            <tr><td><code>gap</code></td><td>Espaço entre linhas e colunas</td></tr>
+            <tr><td><code>justify-items</code> / <code>align-items</code> / <code>place-items</code></td><td>Alinha os itens dentro das células</td></tr>
+            <tr><td><code>justify-content</code> / <code>align-content</code></td><td>Alinha a grade dentro do container</td></tr>
+            <tr><td><code>repeat()</code> / <code>minmax()</code> / <code>fr</code></td><td>Funções e unidade para definir trilhas</td></tr>
+            <tr><td rowspan="4" class="grupo">Itens (filhos)</td><td><code>grid-column</code></td><td>Posição/extensão nas colunas (<code>1 / 3</code>, <code>span 2</code>)</td></tr>
+            <tr><td><code>grid-row</code></td><td>Posição/extensão nas linhas</td></tr>
+            <tr><td><code>grid-area</code></td><td>Coloca o item numa área nomeada</td></tr>
+            <tr><td><code>justify-self</code> / <code>align-self</code> / <code>place-self</code></td><td>Alinhamento individual</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="atividade">
+      <h2>Atividade Prática</h2>
+      <p>Crie uma página <code>atividade-grid.html</code> que contenha:</p>
+      <ul>
+        <li>Uma <strong>galeria de 8 cartões</strong> com <code>repeat(auto-fit, minmax(200px, 1fr))</code> e <code>gap</code>;</li>
+        <li>Nessa galeria, um cartão em <strong>destaque</strong> ocupando 2 colunas (<code>grid-column: span 2</code>);</li>
+        <li>Um <strong>layout de página</strong> com <code>grid-template-areas</code>: topo, menu lateral, conteúdo e rodapé;</li>
+        <li>Um quadrado <strong>centralizado</strong> na tela usando apenas <code>display: grid</code> e <code>place-items: center</code>;</li>
+        <li><strong>Desafio:</strong> no celular (<code>@media (max-width: 600px)</code>), redesenhe as áreas do layout para que tudo fique em uma única coluna.</li>
+      </ul>
+      <p>
+        Para treinar jogando: <a href="https://cssgridgarden.com/#pt-br">Grid Garden</a>.
+        Referência completa: <a href="https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/CSS_layout/Grids">MDN - Grid</a>.
+      </p>
+    </section>
+
+    <section class="teste-css">
+      <h2>Área de Testes</h2>
+      <p>Altere as propriedades de <strong>.teste-container</strong> e das classes <strong>.caixa1</strong> a <strong>.caixa3</strong> no arquivo <strong>grid.css</strong> para ver como o Grid afeta cada elemento. Tente criar 2 colunas, mudar o <code>gap</code> ou fazer a <code>.caixa1</code> ocupar duas colunas.</p>
+
+      <div class="teste-container">
+        <div class="caixa caixa1">.caixa1</div>
+        <div class="caixa caixa2">.caixa2</div>
+        <div class="caixa caixa3">.caixa3</div>
+      </div>
+    </section>
+
+    <nav class="navegacao">
+      <a href="flexbox.html">« 5. Flexbox</a>
+      <a href="index.html">Voltar ao Hub</a>
+    </nav>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por Prof. Dionatan Inhoato Markiu - © 2025</p>
+  </footer>
+
+  <script src="grid.js"></script>
+</body>
+</html>

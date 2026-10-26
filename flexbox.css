@@ -1,0 +1,509 @@
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 20px;
+}
+
+ul {
+  margin-bottom: 15px;
+  padding-left: 22px;
+}
+
+li {
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+h3 {
+  color: #fff;
+  margin: 22px 0 8px;
+}
+
+main a {
+  color: #00d8ff;
+  font-weight: bold;
+}
+
+main a:hover {
+  color: #c8f7ff;
+}
+
+pre {
+  background: rgba(0, 0, 0, 0.35);
+  border-left: 4px solid #00d8ff;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: #c8f7ff;
+}
+
+kbd {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: monospace;
+}
+
+.dica {
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 4px solid #ffd700;
+  border-radius: 8px;
+  padding: 12px 15px;
+}
+
+.rotulo {
+  font-size: 0.9rem;
+  margin: 12px 0 6px;
+}
+
+.nivel {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #000;
+}
+.nivel.basico { background: lightgreen; }
+.nivel.inter  { background: #ffd700; }
+.nivel.app    { background: lightcoral; }
+
+.indice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+}
+
+.indice li {
+  margin: 0;
+}
+
+.indice a {
+  display: block;
+  background: rgba(0, 216, 255, 0.15);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.indice a:hover {
+  background: rgba(0, 216, 255, 0.3);
+}
+
+.demo {
+  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(0, 216, 255, 0.55);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  overflow-x: auto;
+}
+
+.item {
+  background: #00d8ff;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 16px;
+  min-width: 48px;
+  border: 2px solid #2b2b3c;         
+  border-radius: 6px;
+}
+
+.item small {
+  font-weight: normal;
+}
+
+.exemplos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 20px;
+}
+
+.exemplos > div {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+
+.alto-120 { height: 120px; }
+.alto-140 { height: 140px; }
+.alto-160 { height: 160px; }
+
+.a1 { font-size: 1rem;   padding: 10px 16px; }
+.a2 { font-size: 1.8rem; padding: 20px 16px; }
+.a3 { font-size: 1.2rem; padding: 30px 16px; }
+
+.figura-eixos {
+  position: relative;
+  padding: 32px 0 0 38px;
+  margin: 20px 0;
+}
+
+.figura-eixos .demo {
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+
+.eixo-x {
+  position: absolute;
+  top: 0;
+  left: 38px;
+  right: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffd700;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.eixo-x i {
+  flex: 1;
+  border-top: 2px solid currentColor;
+}
+
+.eixo-y {
+  position: absolute;
+  top: 32px;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #ff8a8a;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.eixo-y span {
+  writing-mode: vertical-rl;
+}
+
+.eixo-y i {
+  flex: 1;
+  border-left: 2px solid currentColor;
+}
+
+.demo.bloco {
+  display: block;
+}
+
+.dir-row          { flex-direction: row; }
+.dir-row-reverse  { flex-direction: row-reverse; }
+.dir-col          { flex-direction: column; }
+.dir-col-reverse  { flex-direction: column-reverse; }
+
+.jc-start   { justify-content: flex-start; }
+.jc-center  { justify-content: center; }
+.jc-end     { justify-content: flex-end; }
+.jc-between { justify-content: space-between; }
+.jc-around  { justify-content: space-around; }
+.jc-evenly  { justify-content: space-evenly; }
+
+.ai-stretch  { align-items: stretch; }
+.ai-start    { align-items: flex-start; }
+.ai-center   { align-items: center; }
+.ai-end      { align-items: flex-end; }
+.ai-baseline { align-items: baseline; }
+
+.gap-0  { gap: 0; }
+.gap-10 { gap: 10px; }
+.gap-20 { gap: 20px; }
+
+.largo { width: 150px; }
+
+.wrap-no  { flex-wrap: nowrap; }
+.wrap-yes { flex-wrap: wrap; }
+
+.g1 { flex-grow: 1; }
+
+.f1 { flex: 1; }
+.f2 { flex: 2; }
+
+.lateral {
+  flex: 0 0 150px;
+  background: #ffd700;
+}
+
+.enorme { width: 400px; }
+
+.sem-encolher {
+  flex-shrink: 0;
+  background: #ffd700;
+}
+
+.ord1 { order: 1; }
+.ord2 { order: 2; }
+.ord3 { order: 3; }
+
+.self-center  { align-self: center;   background: lightgreen; }
+.self-end     { align-self: flex-end; background: #ffd700; }
+.self-stretch { align-self: stretch;  background: lightcoral; }
+
+.nav-simples .logo {
+  margin-right: auto;
+  background: #ffd700;
+}
+
+.nav-demo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #1c1c1c;
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.nav-demo a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-demo a:hover {
+  color: #ffcc00;
+}
+
+.nav-logo {
+  margin-right: auto;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.nav-demo button {
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.produtos {
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.produtos-fixos {
+  justify-content: center;
+}
+
+.produtos-fixos .produto {
+  width: 220px;
+}
+
+.produtos-flex .produto {
+  flex: 1 1 220px;
+}
+
+.produto {
+  background: #fff;
+  color: #333;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+}
+
+.produto h4 {
+  color: #1c1c1c;
+  margin: 6px 0 2px;
+}
+
+.produto p {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.produto strong {
+  color: #0066cc;
+  font-size: 1.1rem;
+}
+
+.produto .foto {
+  display: block;
+  font-size: 2.4rem;
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-bottom: 15px;
+}
+
+.controles label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  flex: 1 1 160px;
+}
+
+.controles select,
+.controles input[type="range"] {
+  width: 100%;
+}
+
+.controles select {
+  background: #2b2b3c;
+  color: #fff;
+  border: 1px solid #00d8ff;
+  border-radius: 6px;
+  padding: 7px;
+  font-size: 0.9rem;
+}
+
+.controles output {
+  color: #00d8ff;
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.botoes button {
+  background: #00d8ff;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botoes button:hover {
+  background: #00b8e0;
+}
+
+.playground {
+  height: 280px;
+  margin-bottom: 0;
+}
+
+.tabela-rolagem {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 9px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+th {
+  background: rgba(0, 216, 255, 0.15);
+  color: #00d8ff;
+}
+
+td.grupo {
+  font-weight: bold;
+  color: #ffd700;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+
+.navegacao {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.navegacao a {
+  background: #00d8ff;
+  color: #000;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  transition: 0.3s;
+}
+
+.navegacao a:hover {
+  background: #00b8e0;
+  color: #000;
+}
+
+.teste-css {
+  background: rgba(255, 255, 255, 0.05);
+  margin-top: 40px;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.teste-css h2 {
+  color: #00d8ff;
+  margin-bottom: 10px;
+}
+
+.caixa {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.teste-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.caixa1 {
+  background: lightcoral;
+}
+
+.caixa2 {
+  background: lightblue;
+}
+
+.caixa3 {
+  background: lightgreen;
+}
+
+@media (max-width: 600px) {
+  .item { padding: 8px 12px; }
+  .a1 { padding: 8px 12px; }
+  .a2 { padding: 16px 12px; }
+  .a3 { padding: 24px 12px; }
+  .caixa { width: 90px; height: 90px; font-size: 0.9rem; }
+  .navegacao a { flex: 1 1 100%; text-align: center; }
+}

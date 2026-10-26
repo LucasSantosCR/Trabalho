@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Box Model - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="box-model.css">
+</head>
+<body>
+
+  <header>
+    <h1>Box Model - Aula de CSS</h1>
+    <a href="index.html">⬅ Voltar ao Hub</a>
+  </header>
+
+  <main>
+    <section>
+      <h2>O que é o Box Model?</h2>
+      <p>
+        Todo elemento HTML é representado como uma <strong>caixa retangular</strong> no CSS.  
+        O <strong>Box Model</strong> define como o navegador calcula o tamanho e o espaçamento dessas caixas.
+      </p>
+      <p>O modelo é composto por quatro partes principais:</p>
+      <ul>
+        <li><strong>Content</strong> — o conteúdo em si (texto, imagem, etc.);</li>
+        <li><strong>Padding</strong> — o espaço interno entre o conteúdo e a borda;</li>
+        <li><strong>Border</strong> — a borda que envolve o padding e o conteúdo;</li>
+        <li><strong>Margin</strong> — o espaço externo entre o elemento e outros elementos.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Exemplo Visual do Box Model</h2>
+      <p>
+        Abaixo temos um elemento com quatro camadas: <strong>margin</strong>, <strong>border</strong>, <strong>padding</strong> e <strong>content</strong>.
+      </p>
+
+      <div class="box-model-demo">
+        <div class="margin">
+          Margin
+          <div class="border">
+            Border
+            <div class="padding">
+              Padding
+              <div class="content">
+                Conteúdo
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <pre><code>
+    .elemento {
+      margin: 20px;     /* Espaço fora da borda */
+      border: 5px solid #333;  /* Linha que envolve o padding */
+      padding: 15px;    /* Espaço entre o conteúdo e a borda */
+      background: #00d8ff; /* Área do conteúdo */
+    }
+      </code></pre>
+    </section>
+
+
+    <section>
+      <h2>Exemplo Prático</h2>
+      <p>Abaixo temos uma representação visual de uma caixa:</p>
+
+      <div class="box-demo">
+        Caixa Exemplo
+      </div>
+
+      <p>
+        Neste exemplo, temos:
+        <br>
+        <code>padding: 30px;</code> |
+        <code>border: 5px solid white;</code> |
+        <code>margin: 20px;</code>
+      </p>
+    </section>
+
+    <section>
+      <h2>Componentes do Box Model</h2>
+      <div class="explanation">
+        <div>
+          <h3>1. Content</h3>
+          <p>É o conteúdo real dentro do elemento — como texto, imagens ou outros elementos filhos.  
+          É definido pelo <code>width</code> e <code>height</code>.</p>
+        </div>
+
+        <div>
+          <h3>2. Padding</h3>
+          <p>É o espaço entre o conteúdo e a borda.  
+          Define uma “folga interna” dentro do elemento.  
+          Exemplo: <code>padding: 20px;</code></p>
+        </div>
+
+        <div>
+          <h3>3. Border</h3>
+          <p>É a borda que envolve o conteúdo e o padding.  
+          Pode ter cor, espessura e estilo (ex: <code>solid</code>, <code>dashed</code>, <code>double</code>).</p>
+        </div>
+
+        <div>
+          <h3>4. Margin</h3>
+          <p>É o espaço externo entre o elemento e o que está ao redor.  
+          Exemplo: <code>margin: 15px;</code></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Dica Extra</h2>
+      <p>
+        Para facilitar o controle do tamanho total de um elemento (incluindo bordas e padding),
+        podemos usar:
+      </p>
+      <pre><code>box-sizing: border-box;</code></pre>
+      <p>
+        Isso faz com que o <code>width</code> e <code>height</code> incluam o padding e a borda no cálculo total.
+      </p>
+    </section>
+
+    
+    <section class="teste-css">
+      <h2>🧩 Área de Testes</h2>
+      <p>Altere as classes abaixo no arquivo <strong>position.css</strong> para ver como o CSS afeta cada elemento.</p>
+
+      <div class="teste-container">
+        <div class="caixa caixa1">.caixa1</div>
+        <div class="caixa caixa2">.caixa2</div>
+        <div class="caixa caixa3">.caixa3</div>
+      </div>
+    </section>
+    
+  </main>
+
+  <footer>
+    <p>Desenvolvido por Prof. Dionatan Inhoato Markiu — © 2025</p>
+  </footer>
+
+</body>
+</html>
